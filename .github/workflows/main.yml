@@ -119,3 +119,120 @@ jobs:
           context: ./gateway/
           push: true
           tags: warmanchik/taski_gateway:latest
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: 
+      - build_and_push_to_docker_hub
+      - build_frontend_and_push_to_docker_hub
+      - build_gateway_and_push_to_docker_hub
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Copy docker-compose.yml via ssh
+        uses: appleboy/scp-action@master
+        with:
+          host: 89.169.160.151
+          username: yc-user
+          key: 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
+          passphrase: JlOv3bJ-5z
+          source: "docker-compose.production.yml"
+          target: "taski"
+      - name: Executing remote ssh commands to deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: 89.169.160.151
+          username: yc-user
+          key: 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
+          passphrase: JlOv3bJ-5z
+          script: |
+            cd taski
+            sudo docker compose -f docker-compose.production.yml pull
+            sudo docker compose -f docker-compose.production.yml down
+            sudo docker compose -f docker-compose.production.yml up -d
+            sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate
+            sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic
+            sudo docker compose -f docker-compose.production.yml exec backend cp -r /app/collected_static/. /backend_static/static/
+
+  send_message:
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+    - name: Send message
+      uses: appleboy/telegram-action@master
+      with:
+        to: 5330912748
+        token: 8283862008:AAEBSPQeWep7xuHsbwb2o4nHTCuc2g1qsYc
+        message: Деплой успешно выполнен!
